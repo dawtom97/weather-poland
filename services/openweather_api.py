@@ -1,6 +1,7 @@
 from config import Config
 import requests
 from datetime import datetime
+from utils.functions import to_celsius
 
 URL = f"https://api.openweathermap.org/data/2.5/weather?q={Config.OPENWEATHER_CITY}&appid={Config.OPENWEATHER_API_KEY}"
 
@@ -14,8 +15,8 @@ def fetch_weather():
 
         weather_dict = {
             "miasto": data.get("name"),
-            "temperatura": data.get("main").get("temp"),
-            "odczuwalna_temperatura": data.get("main").get("feels_like"),
+            "temperatura": to_celsius(data.get("main").get("temp")),
+            "odczuwalna_temperatura": to_celsius(data.get("main").get("feels_like")),
             "wilgotnosc": data.get("main").get("humidity"),
             "cisnienie": data.get("main").get("pressure"),
             "wiatr": {
