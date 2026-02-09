@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<header class="topbar">
+  <h1>Wszystkie kraje</h1>
+</header>
+
+<button id="Btn">Kliknij!</button>
+
+<main class="wrap">
+  <section class="cards">
+    {% for country in countries %}
+    <article class="country-card">
+      <div class="flag-box">
+        <img
+          src="{{ country['flags']['png'] }}"
+          alt="Flaga {{ country['name']['common'] }}"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="card-body">
+        <!-- 1) common -->
+        <h2 class="name">{{ country['name']['common'] }}</h2>
+
+        <!-- 2) official -->
+        <p class="row">
+          <span class="label">Official:</span>
+          <span class="value">{{ country['name']['official'] }}</span>
+        </p>
+
+        <!-- (opcjonalnie) kod -->
+        <p class="row">
+          <span class="label">Code:</span>
+          <span class="value">{{ country['cca3'] }}</span>
+        </p>
+
+        <!-- 4) link (bez zmiany app.py -> zewnętrzne “szczegóły” w API) -->
+        <a class="details"
+           href="/panstwa/kraj/{{ country['cca3'] }}">
+          Szczegóły →
+        </a>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+</main>
+
+{% endblock %}

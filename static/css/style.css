@@ -1,0 +1,178 @@
+ * { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #fafafa;
+  color: #111827;
+}
+
+.screen {
+  width:90%;
+  min-width:320px;
+  max-width:1400px;
+  margin: 20px auto;
+}
+
+.topbar{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 8px;
+}
+
+.topbar h1{
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* siatka kafelków */
+.cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+/* kafelek */
+.country-card{
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.country-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+}
+
+/* flaga - zawsze taki sam rozmiar */
+.flag-box{
+  width: 100%;
+  height: 170px;           /* stała wysokość */
+  background: #f3f4f6;
+}
+
+.flag-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* równe kafelki (może lekko kadrować) */
+  display: block;
+}
+
+/* dół kafelka */
+.card-body{
+  padding: 18px 20px 20px; /* padding od brzegu */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* nazwa kraju - wyrównana pozycja */
+.name{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  min-height: 48px;        /* trzyma równo tytuły */
+  display: -webkit-box;    /* ucięcie do 2 linii */
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* wiersze z opisem */
+.row{
+  margin: 0;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.4;
+
+  display: -webkit-box;    /* ucięcie do 2 linii, żeby kafelki się nie rozjeżdżały */
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.label{
+  font-weight: 700;
+  color: #111827;
+}
+
+.value{
+  font-weight: 500;
+}
+
+/* link */
+.details{
+  margin-top: 8px;
+  align-self: flex-start;
+  text-decoration: none;
+  font-weight: 800;
+  color: #111827;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.details:hover{
+  border-bottom-color: #111827;
+}
+
+.weather-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.weather-table thead {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.weather-table th,
+.weather-table td {
+    padding: 10px 12px;
+    text-align: center;
+}
+
+.weather-table tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.weather-table tbody tr:hover {
+    background-color: #e0f2fe;
+    transition: background-color 0.2s ease;
+}
+
+.weather-table td {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.chart-card {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.chart-card.full {
+    grid-column: span 2;
+}
