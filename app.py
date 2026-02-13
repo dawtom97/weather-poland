@@ -1,8 +1,11 @@
-from flask import Flask, render_template, jsonify
-from services.mysql_db import all_weather_records
+from flask import Flask, render_template, jsonify, request
+from services.mysql_db import all_weather_records, save_record
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+from services.mysql_db import all_weather_records
+from services.weather_job import start_weather_job
+import os
 
 app = Flask(__name__)
 
@@ -22,6 +25,9 @@ COMMON_LAYOUT = dict(
         title="Czas"
     )
 )
+
+if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+    start_weather_job(30)
 
 @app.route("/")
 def home_page():
@@ -77,13 +83,44 @@ def home_page():
     )
 
 
+@app.get("/health")
+def get_health():
+    return jsonify(
+        {
+            "message":"API Pogoda",
+            "version":"4.44"
+        }
+    )
+
+@app.get("/weather/all")
+def get_all_weather():
+    try:
+        data = all_weather_records()
+    except Exception as e:
+        data = []
+        print(e)
+
+    return jsonify({
+        "message": "Pobrano dane",
+        "status":200,
+        "data": data
+    })
+
+@app.post("/weather/create")
+def create_weather_record():
+    weather = request.json
+
+    save_record(weather)
+
+    return jsonify({
+        "message": "Wprowadzono dane",
+        "status":201,
+        "data": weather
+    })
 
 
-
-
-
-
-
+if __name__ == "__main__":
+    app.run(debug=True)
 
 # @app.route("/")
 # def hello_world():
